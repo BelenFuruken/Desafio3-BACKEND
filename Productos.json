@@ -1,0 +1,47 @@
+[
+	{
+		"id": 1,
+		"nombre": "Lechuga",
+		"descrip": "Verdulería",
+		"precio": 200,
+		"img": "awr",
+		"codigo": 222,
+		"cantidad": 7
+	},
+	{
+		"id": 2,
+		"nombre": "Tomate",
+		"descrip": "Verdulería",
+		"precio": 1100,
+		"img": "asd",
+		"codigo": 111,
+		"cantidad": 3
+	},
+	{
+		"id": 3,
+		"nombre": "Zanahoria",
+		"descrip": "Verdulería",
+		"precio": 120,
+		"img": "asd",
+		"codigo": 333,
+		"cantidad": 3
+	},
+	{
+		"id": 4,
+		"nombre": "Tomate",
+		"descrip": "Verdulería",
+		"precio": 300,
+		"img": "asd",
+		"codigo": 444,
+		"cantidad": 3
+	},
+	{
+		"id": 5,
+		"nombre": "Tomate",
+		"descrip": "Verdulería",
+		"precio": 300,
+		"img": "asd",
+		"codigo": 555,
+		"cantidad": 3
+	}
+]
