@@ -6,24 +6,39 @@ const PORT = 8000
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-let prueba1 = new ProductManager("../Productos.json")
+const test1 = new ProductManager("Productos.json")
 
-app.get('/products', (req,res)=>{
-    let todosP = prueba1.getProducts().then((rta)=>{return res.json(rta)}) // si acá le pongo return console.log(rta) se me muestra bien 
-    //nose porque acá me deja solo si pongo el res dentro de la promesa, y no me deja poner el res.json(todosP) fuera de la promesa
-    .catch((e)=>console.log("Se produjo un error al mostrar todos los productos: " + e))
-})
-
-app.get('/products/:id', (req,res)=>{
-    let idParametro = req.params.id
-    console.log(idParametro)
-    let existe = prueba1.getProductById(idParametro)
-    console.log("existe: "+existe)
-    if(existe.length>0){
-        res.send(existe)
-    }else{
-        res.send("No existe el producto")
+app.get('/products', async (req,res)=>{
+    try{
+        const allProducts = await test1.getProducts()
+        if(req.query.limit){
+            if(req.query.limit > allProducts.length-1){
+                res.send("Valor ingresado inexistente. No hay "+req.query.limit+" productos.")
+                return
+            }
+            res.send(allProducts.slice(0, req.query.limit)) 
+            return
+        }
+        res.send(allProducts) 
+    }catch(error){
+        res.status(500).send("Ocurrió un error al actualizar los datos: " + error)
     }
+    
+})
+app.get('/products/:id', async (req,res)=>{
+    try{
+        const idParam = parseInt(req.params.id) //poorque el parametro es string
+        console.log(idParam)
+        const exists = await test1.getProductById(idParam) 
+        if(!exists.length>0){
+            res.status(404).send("No existe el producto")
+            return
+        }
+        res.send(exists)
+    }catch(error){
+        console.log("Ocurrió un error al actualizar los datos: " + error)
+    }
+    
 })
 
 app.listen(PORT, ()=>{
